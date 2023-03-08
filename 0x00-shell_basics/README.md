@@ -9,3 +9,5 @@ What each script is doing:
 3-listfiles : displays current directory contents in a long format
 
 4-listmorefiles :displays current directory contents, including hidden files
+
+5-listfilesdigitonly : displays current directory content with user and group ID numerically
