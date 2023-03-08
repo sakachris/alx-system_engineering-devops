@@ -17,3 +17,5 @@ What each script is doing:
 7-movethatfile : move file betty into the new directory in /tmp/
 
 8-firstdelete : deletes the file betty moved above
+
+9-firstdirdeletion : deletes the created directory in /tmp/
