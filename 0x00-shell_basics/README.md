@@ -19,3 +19,23 @@ What each script is doing:
 8-firstdelete : deletes the file betty moved above
 
 9-firstdirdeletion : deletes the created directory in /tmp/
+
+10-back : changes working directory to previous one
+
+11-lists : using ls commands in one line
+
+12-file_type : prints file type
+
+13-symbolic_link : symbolic link
+
+14-copy_html : copying html files
+
+100-lets_move : moving files starting with upper case
+
+101-clean_emacs : deletes emacs files
+
+102-tree : creates directory tree
+
+103-commas : lists by commas
+
+school.mgc : magic file
