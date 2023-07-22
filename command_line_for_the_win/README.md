@@ -3,8 +3,9 @@
 ## Steps followed to upload the files using SFTP:
 
 ### 1. Connected to SFTP using username and hostname
-       ```sftp <Username>@<Host>
-       ```
+```
+sftp <Username>@<Host>
+```
 
 ### 2. Asked: Are you sure you want to continue connecting (yes/no/[fingerprint])?
        ```yes
