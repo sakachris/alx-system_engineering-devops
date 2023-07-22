@@ -3,7 +3,7 @@
 ## Steps followed to upload the files using SFTP:
 
 ### 1. Connected to SFTP using username and hostname
-       ```
+       ```bash
        sftp <Username>@<Host>
        ```
 
