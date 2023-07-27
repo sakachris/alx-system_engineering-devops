@@ -4,5 +4,5 @@
 files="$(ls)"
 for f in $files
 do
-	echo $f | cut -d '-' -f 2
+	echo "$f" | cut -d '-' -f 2
 done
