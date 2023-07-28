@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Bash script to display lists of currently learning process
+ps -aux

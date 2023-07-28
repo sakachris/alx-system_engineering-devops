@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Bash script to display own PID
+echo $$
+# echo $BASHPID
+# bash -c 'echo $PPID'
