@@ -1,7 +1,6 @@
 # Executing pkill command
 
 exec { 'killmenow':
-  command     => 'pkill killmenow',
-  path        => '/bin:/usr/bin',
-  refreshonly => true,
+  path    => '/usr/bin',
+  command => 'pkill killmenow',
 }
