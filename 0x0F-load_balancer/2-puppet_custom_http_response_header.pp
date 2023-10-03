@@ -1,9 +1,17 @@
 # Installing Nginx and configuration
 
-exec { 'install config nginx':
-  provider => shell,
-  command  => 'apt-get -y update;
-              apt-get -y install nginx;
-	      sed -i "/a add_header X-Served-By \$hostname;" /etc/nginx/sites-available/default;
-	      service nginx restart',
-}
+  package { 'nginx':
+    ensure => installed,
+  }
+
+  file { '/etc/nginx/http_header.conf':
+    ensure  => present,
+    content => "add_header X-Served-By ${hostname};",
+    notify  => Service['nginx'],
+  }
+
+  service { 'nginx':
+    ensure  => running,
+    enable  => true,
+    require => Package['nginx'],
+  }
