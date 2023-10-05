@@ -1,24 +1,23 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2086
-# displays information about subdomains
+# display dns information
 
-dns_info() {
-	domain="$1"
-	# subdomain="$2"
-	if [ "$2" ]; then
-		subdomain="$2"
-	else
+dns_info ()
+{
+    domain="$1"
 
-	# if [ -z "$subdomain" ]; then
-		subdomain=("www" "lb-01" "web-01" "web-02")
-	# else
-	#	subs=("$subdomain")
-	fi
-
-	for sub in "${subdomain[@]}"; do
-		echo -n "The subdomain $sub"
-		dig $sub.$domain | grep -A1 'ANSWER SECTION:' | tail -n 1 | awk '{print " is a " $4 " record and points to " $5}'
-	done
+    if [ "$2" ]
+    then
+	subdomain="$2"
+    else
+	subdomain="www lb-01 web-01 web-02"
+    fi
+    for sub in $subdomain
+    do
+	echo -n "The subdomain $sub"
+	dig $sub.$domain | grep -A1 'ANSWER SECTION:' | tail -n 1 | awk '{print " is a " $4 " record and points to " $5}'
+    done
 }
+
 
 dns_info "$1" "$2"
