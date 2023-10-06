@@ -2,23 +2,23 @@
 # shellcheck disable=SC2086
 # displays information about subdomains
 
+domain="$1"
+subdomain="$2"
+
 dns_info() {
-	domain="$1"
-	# subdomain="$2"
-	if [ "$2" ]; then
-		subdomain="$2"
-	else
-
-	# if [ -z "$subdomain" ]; then
-		subdomain=("www" "lb-01" "web-01" "web-02")
-	# else
-	#	subs=("$subdomain")
-	fi
-
-	for sub in "${subdomain[@]}"; do
-		echo -n "The subdomain $sub"
-		dig $sub.$domain | grep -A1 'ANSWER SECTION:' | tail -n 1 | awk '{print " is a " $4 " record and points to " $5}'
-	done
+	host=$(dig "$1" | grep -A1 'ANSWER SECTION:' | tail -n 1)
+	echo "$host" |
+	awk '{print "The subdomain","'"$sub"'","is a",$4,"record and points to",$5}'
 }
 
-dns_info "$1" "$2"
+if [ "$domain" ] && [ "$subdomain" ] ; then
+	info="$subdomain.$domain"
+	dns_info "$info"
+elif [ "$domain" ] ; then
+	subdomains=("www" "lb-01" "web-01" "web-02")
+	
+	for sub in "${subdomains[@]}" ; do
+		info="$sub.$domain"
+		dns_info "$info"
+	done
+fi
