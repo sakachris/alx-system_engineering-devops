@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# shellcheck disable=SC2086
 # displays information about subdomains
 
 domain="$1"
@@ -7,7 +6,7 @@ subdomain="$2"
 
 dns_info() {
 	host=$(dig "$1" | grep -A1 'ANSWER SECTION:' | tail -n 1)
-	echo "$host" |
+	echo -n "$host" |
 	awk '{print "The subdomain","'"$sub"'","is a",$4,"record and points to",$5}'
 }
 
