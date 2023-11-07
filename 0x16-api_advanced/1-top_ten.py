@@ -7,13 +7,15 @@ import requests
 
 def number_of_subscribers(subreddit):
     """
-    queries api to return subscribers
+    prints the titles of the first 10 hot posts listed for a given subreddit
     """
-    url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
+    url = "https://www.reddit.com/r/{}/hot.json?limit=10".format(subreddit)
     headers = {'User-Agent': 'chris'}
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
         data = response.json()
-        return data['data']['subscribers']
+        posts = data['data']['children']
+        for post in posts:
+            print(post['data']['title']
     else:
-        return 0
+        return None
