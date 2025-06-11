@@ -1,2 +1,3 @@
 #!/bin/bash
+# new
 while read -r; do echo "$REPLY"; read -r; done
