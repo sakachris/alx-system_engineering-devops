@@ -1,3 +1,2 @@
 #!/bin/bash
-# new
-while read -r; do echo "$REPLY"; read -r; done
+{ while IFS= read -r line; do echo "$line"; IFS= read -r; done; }
