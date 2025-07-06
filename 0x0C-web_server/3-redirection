@@ -1,10 +1,27 @@
 #!/usr/bin/env bash
 # Installing Nginx and redirection
 
-apt-get -y update
-apt-get -y install nginx
-ufw allow 'Nginx HTTP'
+set -e  # Exit immediately if a command fails
+
+# Install Nginx
+apt-get update -y
+apt-get install nginx -y
+
+# Allow HTTP through firewall
+ufw allow 'Nginx HTTP' || true
+
+# Create Hello World index page
 echo "Hello World!" > /var/www/html/index.html
-service nginx start
-sed -i "25i location /redirect_me {\n return 301 https://www.youtube.com/watch?v=v5nfmtFzvvk;\n}\n" /etc/nginx/sites-available/default
+
+# Add redirect to Nginx config if not already present
+redirect_config="location /redirect_me {
+    return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+}"
+
+# Inject redirect block into the server block
+if ! grep -q "/redirect_me" /etc/nginx/sites-available/default; then
+    sed -i "/server_name _;/a \\\n    ${redirect_config//$'\n'/\\n}" /etc/nginx/sites-available/default
+fi
+
+# Restart Nginx
 service nginx restart
