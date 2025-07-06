@@ -1,9 +1,17 @@
 #!/usr/bin/env bash
 # Installing Nginx
 
-apt-get -y update
-apt-get -y install nginx
-ufw allow 'Nginx HTTP'
-echo "Hello World!" > /var/www/html/index.html 
-# sed -i 's/listen 80 default_server;/listen 80;/' /etc/nginx/sites-available/default
-service nginx start
+set -e  # Exit immediately if a command exits with a non-zero status
+
+# Update and install Nginx
+apt-get update -y
+apt-get install nginx -y
+
+# Allow HTTP through the firewall
+ufw allow 'Nginx HTTP' || true  # avoid failing if ufw is not installed or already allowed
+
+# Overwrite the default web page
+echo "Hello World!" > /var/www/html/index.html
+
+# Start or restart nginx using service
+service nginx restart
